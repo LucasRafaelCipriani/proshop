@@ -18,6 +18,8 @@ const CartScreen = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+
   const { cartItems, totalQty } = cart;
 
   const updateCartHandler = async (item, qty) => {
@@ -29,7 +31,11 @@ const CartScreen = () => {
   };
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=/shipping');
+    if (userInfo) {
+      navigate('/shipping');
+    } else {
+      navigate('/login?redirect=/shipping');
+    }
   };
 
   return (
