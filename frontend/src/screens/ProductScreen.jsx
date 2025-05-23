@@ -20,6 +20,7 @@ import { addToCart } from '../slices/cartSlice';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import MetaData from '../components/MetaData';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -81,6 +82,7 @@ const ProductScreen = () => {
         </Message>
       ) : (
         <>
+          <MetaData title={product.name} description={product.description} />
           <Row>
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />

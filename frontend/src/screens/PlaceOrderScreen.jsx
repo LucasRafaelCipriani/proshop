@@ -16,6 +16,7 @@ import { clearCartItems } from '../slices/cartSlice';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import MetaData from '../components/MetaData';
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ const PlaceOrderScreen = () => {
 
   return (
     <>
+      <MetaData title="Checkout" />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

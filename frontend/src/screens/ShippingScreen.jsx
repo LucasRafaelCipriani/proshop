@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { saveShippingAddress } from '../slices/cartSlice';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
+import MetaData from '../components/MetaData';
 
 const ShippingScreen = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const ShippingScreen = () => {
 
   return (
     <FormContainer>
+      <MetaData title="Shipping" />
       <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>

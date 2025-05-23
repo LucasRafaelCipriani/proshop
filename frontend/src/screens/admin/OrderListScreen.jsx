@@ -15,7 +15,7 @@ const OrderListScreen = () => {
         <Loader />
       ) : isError ? (
         <Message variant="danger">{error}</Message>
-      ) : (
+      ) : orders.length > 0 ? (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
@@ -63,6 +63,8 @@ const OrderListScreen = () => {
             ))}
           </tbody>
         </Table>
+      ) : (
+        <Message>No Orders</Message>
       )}
     </>
   );

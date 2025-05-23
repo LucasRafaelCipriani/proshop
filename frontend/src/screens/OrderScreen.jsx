@@ -12,6 +12,7 @@ import {
 } from '../slices/ordersApiSlice';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import MetaData from '../components/MetaData';
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
@@ -110,6 +111,7 @@ const OrderScreen = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
+      <MetaData title={`Order ${order._id}`} />
       <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>

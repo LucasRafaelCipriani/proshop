@@ -7,6 +7,7 @@ import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
+import MetaData from '../components/MetaData';
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const RegisterScreen = () => {
 
   return (
     <FormContainer>
+      <MetaData title="Sign Up" />
       <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name" className="my-3">

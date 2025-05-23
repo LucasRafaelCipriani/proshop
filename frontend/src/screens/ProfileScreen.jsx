@@ -9,6 +9,7 @@ import { useGetMyOrdersQuery } from '../slices/ordersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import MetaData from '../components/MetaData';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const ProfileScreen = () => {
 
   return (
     <Row>
+      <MetaData title="User Profile" />
       <Col md={3}>
         <h2>User Profile</h2>
 

@@ -7,6 +7,7 @@ import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
+import MetaData from '../components/MetaData';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
+      <MetaData title="Sign In" />
       <h1>Sign In</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { savePaymentMethod } from '../slices/cartSlice';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
+import MetaData from '../components/MetaData';
 
 const PaymentScreen = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const PaymentScreen = () => {
 
   return (
     <FormContainer>
+      <MetaData title="Payment Method" />
       <CheckoutSteps step1 step2 step3 />
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>
