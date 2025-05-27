@@ -108,7 +108,7 @@ const OrderScreen = () => {
   return isLoading ? (
     <Loader />
   ) : isError ? (
-    <Message variant="danger">{error}</Message>
+    <Message variant="danger">{error?.data?.message || error.error}</Message>
   ) : (
     <>
       <MetaData title={`Order ${order._id}`} />

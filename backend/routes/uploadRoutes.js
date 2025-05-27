@@ -1,4 +1,5 @@
 import path from 'path';
+import { existsSync, mkdirSync } from 'fs';
 import express from 'express';
 import multer from 'multer';
 
@@ -16,41 +17,40 @@ const storage = multer.diskStorage({
   },
 });
 
-function checkFileType(file, cb) {
-  const fileTypes = /jpg|jpeg|png/;
-  const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimeType = fileTypes.test(file.mimetype);
+function fileFilter(req, file, cb) {
+  const filetypes = /jpe?g|png|webp/;
+  const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
 
-  if (extName && mimeType) {
-    return cb(null, true);
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = mimetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    cb(null, true);
   } else {
-    cb('Images only!');
+    cb(new Error('Images only!'), false);
   }
 }
 
-const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
-});
+const upload = multer({ storage, fileFilter });
 
-router.post('/', (req, res, next) => {
-  upload.single('image')(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      return res.status(400).json({ message: err.message });
-    } else if (err) {
-      return res.status(400).json({ message: 'Images only!' });
+const uploadSingleImage = upload.single('image');
+
+router.post('/', (req, res) => {
+  const filePath = 'uploads/';
+
+  if (!existsSync(filePath)) {
+    mkdirSync(filePath);
+  }
+
+  uploadSingleImage(req, res, function (err) {
+    if (err) {
+      res.status(400).send({ message: err.message });
+    } else {
+      res.status(200).send({
+        message: 'Image uploaded successfully',
+        image: `/${req.file.path}`,
+      });
     }
-
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
-    }
-
-    res.status(200).json({
-      message: 'Image Uploaded',
-      image: `/${req.file.path}`,
-    });
   });
 });
 

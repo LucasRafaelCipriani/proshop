@@ -67,7 +67,9 @@ const UserEditScreen = () => {
         {isLoading ? (
           <Loader />
         ) : isError ? (
-          <Message variant="danger">{error}</Message>
+          <Message variant="danger">
+            {error?.data?.message || error.error}
+          </Message>
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name" className="my-2">

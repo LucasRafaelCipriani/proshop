@@ -14,7 +14,9 @@ const OrderListScreen = () => {
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : orders.length > 0 ? (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
